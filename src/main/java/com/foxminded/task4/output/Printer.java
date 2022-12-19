@@ -1,15 +1,15 @@
 package com.foxminded.task4.output;
 
-import com.foxminded.task4.manager.Manager;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Printer {
-    public void print(LinkedHashMap<String, Integer> result ){
+    public static String printResult(LinkedHashMap<String, Integer> result) {
+        StringBuilder stringResult = new StringBuilder();
         for (Map.Entry<String, Integer> mapElement :
                 result.entrySet()) {
-            System.out.println("\""+mapElement.getKey() + "\" - " + mapElement.getValue());
+            stringResult.append("\"").append(mapElement.getKey()).append("\" - ").append(mapElement.getValue()).append("\n");
         }
+        return stringResult.toString();
     }
 }

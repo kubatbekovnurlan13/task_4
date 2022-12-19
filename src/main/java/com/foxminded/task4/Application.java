@@ -1,5 +1,7 @@
 package com.foxminded.task4;
 
+import com.foxminded.task4.cache.Cache;
+import com.foxminded.task4.calculation.Calculation;
 import com.foxminded.task4.manager.Manager;
 import com.foxminded.task4.output.Printer;
 
@@ -7,15 +9,18 @@ import java.util.LinkedHashMap;
 
 public class Application {
     public static void main(String[] args) {
+
         System.out.println("Hello World!");
 
-        Manager manager = new Manager();
+        Calculation calculation = new Calculation();
+        Cache cache = new Cache();
 
-        Printer printer = new Printer();
+        Manager manager = new Manager(calculation, cache);
 
         LinkedHashMap<String, Integer> result = manager.getResult("Hello World!");
 
-        printer.print(result);
+        String res = Printer.printResult(result);
 
+        System.out.println(res);
     }
 }

@@ -6,21 +6,26 @@ import com.foxminded.task4.calculation.Calculation;
 import java.util.LinkedHashMap;
 
 public class Manager {
-    private Calculation calculation = new Calculation();
-    private Cache cache = new Cache();
-    private LinkedHashMap<String, Integer> result;
+    private final Calculation calculation;
+    private final Cache cache;
+
+    public Manager(Calculation calculation, Cache cache) {
+        this.calculation = calculation;
+        this.cache = cache;
+    }
 
     public LinkedHashMap<String, Integer> getResult(String inputString) {
 
-        if (cache.getInputString() != null && cache.getInputString().equals(inputString)) {
-            result = cache.getCashedValues();
-            System.out.println("Cashe used!");
+        LinkedHashMap<String, Integer> result;
+        if (this.cache.isThereCash(inputString)) {
+            result = this.cache.getCashedValues();
+            System.out.println("Cash used!");
         } else {
-            result = calculation.calculate(inputString);
-            cache.setInputString(inputString);
-            cache.setCashedValues(result);
+            result = this.calculation.calculate(inputString);
+            this.cache.setInputString(inputString);
+            this.cache.setCashedValues(result);
+            System.out.println("Cash not used!");
         }
-
         return result;
     }
 }
