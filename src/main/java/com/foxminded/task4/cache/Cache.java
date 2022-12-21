@@ -1,26 +1,35 @@
 package com.foxminded.task4.cache;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class Cache {
-    private LinkedHashMap<String, Integer> cashedValues;
-    private String inputString;
+    private final LinkedHashMap<String, Map<String, Integer>> cashedValues = new LinkedHashMap<>(5) {
+        protected boolean removeEldestEntry(Map.Entry<String, Map<String, Integer>> eldest) {
+            int MAX = 5;
+            return size() > MAX;
+        }
+    };
 
-    public boolean isThereCash(String someString) {
-        if (this.inputString == null) {
-            return false;
-        } else return someString.equals(this.inputString);
+    public boolean checkIfItInCache(String newStringValue) {
+        for (Map.Entry<String, Map<String, Integer>> mapElement : cashedValues.entrySet()) {
+            if (Objects.equals(mapElement.getKey(), newStringValue)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public LinkedHashMap<String, Integer> getCashedValues() {
-        return this.cashedValues;
+    public void putInCache(String newStringValue, Map<String, Integer> newMapValue) {
+        cashedValues.put(newStringValue, newMapValue);
     }
 
-    public void setCashedValues(LinkedHashMap<String, Integer> cashedValues) {
-        this.cashedValues = cashedValues;
-    }
+//    public LinkedHashMap<String, Map<String, Integer>> getCashedValues() {
+//        return cashedValues;
+//    }
 
-    public void setInputString(String inputString) {
-        this.inputString = inputString;
+    public Map<String, Integer> getValueFromCashe(String newStringValue) {
+        return cashedValues.get(newStringValue);
     }
 }

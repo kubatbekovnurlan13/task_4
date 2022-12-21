@@ -3,7 +3,7 @@ package com.foxminded.task4.manager;
 import com.foxminded.task4.cache.Cache;
 import com.foxminded.task4.calculation.Calculation;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Manager {
     private final Calculation calculation;
@@ -14,16 +14,15 @@ public class Manager {
         this.cache = cache;
     }
 
-    public LinkedHashMap<String, Integer> getResult(String inputString) {
+    public Map<String, Integer> getResult(String inputString) {
 
-        LinkedHashMap<String, Integer> result;
-        if (this.cache.isThereCash(inputString)) {
-            result = this.cache.getCashedValues();
+        Map<String, Integer> result;
+        if (this.cache.checkIfItInCache(inputString)) {
+            result = cache.getValueFromCashe(inputString);
             System.out.println("Cash used!");
         } else {
-            result = this.calculation.calculate(inputString);
-            this.cache.setInputString(inputString);
-            this.cache.setCashedValues(result);
+            result = calculation.calculate(inputString);
+            cache.putInCache(inputString, result);
             System.out.println("Cash not used!");
         }
         return result;

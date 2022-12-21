@@ -1,10 +1,9 @@
 package com.foxminded.task4.output;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Printer {
-    public static String printResult(LinkedHashMap<String, Integer> result) {
+    public static String printResult(Map<String, Integer> result) {
         StringBuilder stringResult = new StringBuilder();
         for (Map.Entry<String, Integer> mapElement :
                 result.entrySet()) {
