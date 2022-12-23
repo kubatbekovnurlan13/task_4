@@ -14,9 +14,9 @@ public class Manager {
         this.cache = cache;
     }
 
-    public Map<String, Integer> getResult(String inputString) {
+    public Map<Character, Integer> getResult(String inputString) {
 
-        Map<String, Integer> result;
+        Map<Character, Integer> result;
         if (this.cache.checkIfItInCache(inputString)) {
             result = cache.getValueFromCashe(inputString);
             System.out.println("Cash used!");

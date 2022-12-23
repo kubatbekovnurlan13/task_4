@@ -15,12 +15,12 @@ public class Application {
 
         Manager manager = new Manager(calculation, cache);
 
-        Map<String, Integer> result1 = manager.getResult("Hello World!");
+        Map<Character, Integer> result1 = manager.getResult("Hello World!");
 
         String res = Printer.printResult(result1);
         System.out.println(res);
 
-        Map<String, Integer> result2 = manager.getResult("Hello World!");
+        Map<Character, Integer> result2 = manager.getResult("Hello World!");
 
         String res2 = Printer.printResult(result2);
         System.out.println(res2);
