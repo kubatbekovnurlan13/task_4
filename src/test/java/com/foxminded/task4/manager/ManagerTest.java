@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
 public class ManagerTest {
@@ -24,9 +25,21 @@ public class ManagerTest {
         Manager manager = Mockito.spy(new Manager(calculation, cache));
         Mockito.when(cache.checkIfItInCache("Hello World!")).thenReturn(false);
 
-        Map<Character, Integer> name = manager.getResult("Hello World!");
+        Map<Character, Integer> call = manager.getResult("Hello World!");
 
         Mockito.verify(calculation).calculate("Hello World!");
+    }
+
+    @Test
+    void getResult_testHowManyTimesCalculateMethodOfCalculationIsCalled_whenInCasheSomeValue() {
+        Manager manager = Mockito.spy(new Manager(calculation, cache));
+        Mockito.when(cache.checkIfItInCache("Hello World!")).thenReturn(true);
+
+        Map<Character, Integer> call1 = manager.getResult("Hello World!");
+        Map<Character, Integer> call2 = manager.getResult("Hello World!");
+        Map<Character, Integer> call3 = manager.getResult("Hello World!");
+
+        Mockito.verify(calculation, times(0)).calculate("Hello World!");
     }
 
 
@@ -35,10 +48,12 @@ public class ManagerTest {
         Manager manager = Mockito.spy(new Manager(calculation, cache));
         Mockito.when(cache.checkIfItInCache("Hello World!")).thenReturn(true);
 
-        Map<Character, Integer> name = manager.getResult("Hello World!");
+        Map<Character, Integer> call = manager.getResult("Hello World!");
 
         Mockito.verify(cache).getValueFromCashe("Hello World!");
     }
+
+
 
     @Test
     void getResult_testGetResult_whenInputValue() {
