@@ -1,19 +1,13 @@
-package com.foxminded.task4.calculation;
+package com.foxminded.task4.transformation;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Calculation {
-    public Map<Character, Integer> calculate(String inputString) {
+public class Transformation {
+    public Map<Character, Integer> transform(String inputString) {
         char[] separatedString = separateStringAndMakeArray(inputString);
-
-        Map<Character, Integer> res = countChar(separatedString);
-        for (Map.Entry<Character, Integer> mapElement :
-                res.entrySet()) {
-            System.out.println(mapElement);
-        }
-        return res;
+        return countChar(separatedString);
     }
 
     private char[] separateStringAndMakeArray(String inputString) {

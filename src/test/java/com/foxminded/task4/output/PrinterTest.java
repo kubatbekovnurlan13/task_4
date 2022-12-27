@@ -1,7 +1,7 @@
 package com.foxminded.task4.output;
 
 import com.foxminded.task4.cache.Cache;
-import com.foxminded.task4.calculation.Calculation;
+import com.foxminded.task4.transformation.Transformation;
 import com.foxminded.task4.manager.Manager;
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PrinterTest {
     @Test
     void printResult_testPrintResult_whenSomeValuesInput() {
-        Calculation calculation = new Calculation();
+        Transformation transformation = new Transformation();
         Cache cache = new Cache();
 
-        Manager manager = new Manager(calculation, cache);
+        Manager manager = new Manager(transformation, cache);
 
         Map<Character, Integer> result = manager.getResult("Hello World!");
 

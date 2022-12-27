@@ -1,16 +1,16 @@
 package com.foxminded.task4.manager;
 
 import com.foxminded.task4.cache.Cache;
-import com.foxminded.task4.calculation.Calculation;
+import com.foxminded.task4.transformation.Transformation;
 
 import java.util.Map;
 
 public class Manager {
-    private final Calculation calculation;
+    private final Transformation transformation;
     private final Cache cache;
 
-    public Manager(Calculation calculation, Cache cache) {
-        this.calculation = calculation;
+    public Manager(Transformation transformation, Cache cache) {
+        this.transformation = transformation;
         this.cache = cache;
     }
 
@@ -19,11 +19,11 @@ public class Manager {
         Map<Character, Integer> result;
         if (this.cache.checkIfItInCache(inputString)) {
             result = cache.getValueFromCashe(inputString);
-            System.out.println("Cash used!");
+//            System.out.println("Cash used!");
         } else {
-            result = calculation.calculate(inputString);
+            result = transformation.transform(inputString);
             cache.putInCache(inputString, result);
-            System.out.println("Cash not used!");
+//            System.out.println("Cash not used!");
         }
         return result;
     }

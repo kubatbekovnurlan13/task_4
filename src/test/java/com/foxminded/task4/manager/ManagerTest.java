@@ -1,7 +1,7 @@
 package com.foxminded.task4.manager;
 
 import com.foxminded.task4.cache.Cache;
-import com.foxminded.task4.calculation.Calculation;
+import com.foxminded.task4.transformation.Transformation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -18,34 +18,34 @@ public class ManagerTest {
     @Mock
     private Cache cache;
     @Mock
-    private Calculation calculation;
+    private Transformation transformation;
 
     @Test
     void getResult_testCalculateMethodOfCalculation_whenInCasheNoValue() {
-        Manager manager = Mockito.spy(new Manager(calculation, cache));
+        Manager manager = Mockito.spy(new Manager(transformation, cache));
         Mockito.when(cache.checkIfItInCache("Hello World!")).thenReturn(false);
 
         Map<Character, Integer> call = manager.getResult("Hello World!");
 
-        Mockito.verify(calculation).calculate("Hello World!");
+        Mockito.verify(transformation).transform("Hello World!");
     }
 
     @Test
     void getResult_testHowManyTimesCalculateMethodOfCalculationIsCalled_whenInCasheSomeValue() {
-        Manager manager = Mockito.spy(new Manager(calculation, cache));
+        Manager manager = Mockito.spy(new Manager(transformation, cache));
         Mockito.when(cache.checkIfItInCache("Hello World!")).thenReturn(true);
 
         Map<Character, Integer> call1 = manager.getResult("Hello World!");
         Map<Character, Integer> call2 = manager.getResult("Hello World!");
         Map<Character, Integer> call3 = manager.getResult("Hello World!");
 
-        Mockito.verify(calculation, times(0)).calculate("Hello World!");
+        Mockito.verify(transformation, times(0)).transform("Hello World!");
     }
 
 
     @Test
     void getResult_testGetValueFromCasheMethodOfCashe_whenInCasheIsValue() {
-        Manager manager = Mockito.spy(new Manager(calculation, cache));
+        Manager manager = Mockito.spy(new Manager(transformation, cache));
         Mockito.when(cache.checkIfItInCache("Hello World!")).thenReturn(true);
 
         Map<Character, Integer> call = manager.getResult("Hello World!");
@@ -57,7 +57,7 @@ public class ManagerTest {
 
     @Test
     void getResult_testGetResult_whenInputValue() {
-        Manager manager = new Manager(new Calculation(), new Cache());
+        Manager manager = new Manager(new Transformation(), new Cache());
 
         Map<Character, Integer> actual = manager.getResult("Hello World!");
         Map<Character, Integer> expected = Map.of('H', 1, 'e', 1, 'l', 3, 'o', 2, ' ', 1, 'W', 1, 'r', 1, 'd', 1, '!', 1);
@@ -66,7 +66,7 @@ public class ManagerTest {
 
     @Test
     void getResult_testGetResult_whenInputNull() {
-        Manager manager = new Manager(new Calculation(), new Cache());
+        Manager manager = new Manager(new Transformation(), new Cache());
 
         Exception exception = assertThrows(NullPointerException.class,
                 () -> manager.getResult(null));

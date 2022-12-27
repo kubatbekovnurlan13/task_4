@@ -1,6 +1,5 @@
-package com.foxminded.task4.cashe;
+package com.foxminded.task4.cache;
 
-import com.foxminded.task4.cache.Cache;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -8,22 +7,22 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class CasheTest {
+public class CaсheTest {
     private final Cache cache = new Cache();
 
     @Test
     void checkIfItInCache_testCheckIfItInCache_whenStringIsAlreadyInCashe() {
         cache.putInCache("Hello World!", Map.of('c', 1));
 
-        Boolean actual = cache.checkIfItInCache("Hello World!");
-        Boolean expected = true;
+        boolean actual = cache.checkIfItInCache("Hello World!");
+        boolean expected = true;
         assertEquals(expected, actual);
     }
 
     @Test
     void checkIfItInCache_testCheckIfItInCache_whenThereIsNoValueInCashe() {
-        Boolean actual = cache.checkIfItInCache("Hello World!");
-        Boolean expected = false;
+        boolean actual = cache.checkIfItInCache("Hello World!");
+        boolean expected = false;
         assertEquals(expected, actual);
     }
 
