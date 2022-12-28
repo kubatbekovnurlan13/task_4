@@ -11,13 +11,10 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
-
         app();
-
     }
 
     private static void app() {
-        
         Manager manager = new Manager(new Transformation(), new Cache());
 
         boolean run = true;
