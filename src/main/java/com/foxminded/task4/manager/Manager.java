@@ -1,29 +1,27 @@
 package com.foxminded.task4.manager;
 
 import com.foxminded.task4.cache.Cache;
-import com.foxminded.task4.transformation.Transformation;
+import com.foxminded.task4.calculator.Calculator;
 
 import java.util.Map;
 
 public class Manager {
-    private final Transformation transformation;
+    private final Calculator calculator;
     private final Cache cache;
 
-    public Manager(Transformation transformation, Cache cache) {
-        this.transformation = transformation;
+    public Manager(Calculator calculator, Cache cache) {
+        this.calculator = calculator;
         this.cache = cache;
     }
 
     public Map<Character, Integer> getResult(String inputString) {
 
         Map<Character, Integer> result;
-        if (this.cache.checkIfItInCache(inputString)) {
-            result = cache.getValueFromCashe(inputString);
-//            System.out.println("Cash used!");
+        if (cache.checkIfValueAlreadyItIn(inputString)) {
+            result = cache.getValue(inputString);
         } else {
-            result = transformation.transform(inputString);
-            cache.putInCache(inputString, result);
-//            System.out.println("Cash not used!");
+            result = calculator.transform(inputString);
+            cache.putIn(inputString, result);
         }
         return result;
     }

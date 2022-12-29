@@ -6,16 +6,15 @@ import java.util.Map;
 public class Cache {
     private final LinkedHashMap<String, Map<Character, Integer>> cashedValues = new LinkedHashMap<>();
 
-    public void putInCache(String newStringValue, Map<Character, Integer> newMapValue) {
+    public void putIn(String newStringValue, Map<Character, Integer> newMapValue) {
         cashedValues.put(newStringValue, newMapValue);
     }
 
-    public boolean checkIfItInCache(String newStringValue) {
+    public boolean checkIfValueAlreadyItIn(String newStringValue) {
         return cashedValues.containsKey(newStringValue);
     }
 
-
-    public Map<Character, Integer> getValueFromCashe(String newStringValue) {
+    public Map<Character, Integer> getValue(String newStringValue) {
         return cashedValues.get(newStringValue);
     }
 }

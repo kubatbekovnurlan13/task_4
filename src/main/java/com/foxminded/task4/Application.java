@@ -1,7 +1,7 @@
 package com.foxminded.task4;
 
 import com.foxminded.task4.cache.Cache;
-import com.foxminded.task4.transformation.Transformation;
+import com.foxminded.task4.calculator.Calculator;
 import com.foxminded.task4.manager.Manager;
 import com.foxminded.task4.output.Printer;
 
@@ -11,11 +11,14 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
-        app();
+//        app();
+        Cache cache = new Cache();
+        Map<Character, Integer> ans = cache.getValue(null);
+        System.out.println(ans);
     }
 
     private static void app() {
-        Manager manager = new Manager(new Transformation(), new Cache());
+        Manager manager = new Manager(new Calculator(), new Cache());
 
         boolean run = true;
         System.out.println("Welcome to application!");

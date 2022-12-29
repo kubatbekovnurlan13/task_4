@@ -1,10 +1,10 @@
-package com.foxminded.task4.transformation;
+package com.foxminded.task4.calculator;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Transformation {
+public class Calculator {
     public Map<Character, Integer> transform(String inputString) {
         char[] separatedString = separateStringAndMakeArray(inputString);
         return countChar(separatedString);
@@ -18,9 +18,7 @@ public class Transformation {
         Map<Character, Integer> result = new LinkedHashMap<>();
 
         for (Character s : separatedString) {
-            if (!result.containsKey(s)) {
-                result.put(s, 1);
-            } else {
+            if (result.containsKey(s)) {
                 int newCounterValueOfChar = result.get(s) + 1;
                 for (Map.Entry<Character, Integer> mapElement :
                         result.entrySet()) {
@@ -28,6 +26,8 @@ public class Transformation {
                         mapElement.setValue(newCounterValueOfChar);
                     }
                 }
+            } else {
+                result.put(s, 1);
             }
         }
         return result;
