@@ -11,10 +11,7 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
-//        app();
-        Cache cache = new Cache();
-        Map<Character, Integer> ans = cache.getValue(null);
-        System.out.println(ans);
+        app();
     }
 
     private static void app() {
