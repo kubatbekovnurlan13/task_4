@@ -73,7 +73,7 @@ public class ManagerTest {
     }
 
     @Test
-    void getResult_testInvocationOfMethodOfManagerCalculatorCacheClasses_whenOriginallyNoValueInCache() {
+    void getResult_testInvocationOfMethodsOfManagerCalculatorCacheClasses_whenOriginallyNoValueInCache() {
         Manager manager = Mockito.spy(new Manager(calculator, cache));
 
         manager.getResult(value);
@@ -91,5 +91,27 @@ public class ManagerTest {
         order.verify(cache).checkIfValueAlreadyItIn(value);
         order.verify(cache).getValue(value);
         order.verify(calculator, never()).transform(value);
+    }
+
+    @Test
+    void getResult_testHowManyTimesTransformMethodOfCalculatorIsCalled_whenInCacheNoValue() {
+        Manager manager = Mockito.spy(new Manager(calculator, cache));
+        Mockito.when(cache.checkIfValueAlreadyItIn(value)).thenReturn(false);
+
+        manager.getResult(value);
+        manager.getResult(value);
+
+        Mockito.verify(calculator, times(2)).transform(value);
+    }
+
+    @Test
+    void getResult_testHowManyTimesGetValueMethodOfCacheIsCalled_whenInCacheSomeValue() {
+        Manager manager = Mockito.spy(new Manager(calculator, cache));
+        Mockito.when(cache.checkIfValueAlreadyItIn(value)).thenReturn(true);
+
+        manager.getResult(value);
+        manager.getResult(value);
+
+        Mockito.verify(cache, times(2)).getValue(value);
     }
 }
